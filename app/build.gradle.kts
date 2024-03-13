@@ -1,6 +1,10 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("io.realm.kotlin")
+    id("dagger.hilt.android.plugin")
+    //id("com.google.gms.google-services")
 }
 
 android {
@@ -59,6 +63,59 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+
+
+    // compose navigation...//
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    // Firebase...//
+    implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
+    implementation("com.google.firebase:firebase-storage-ktx:22.3.1")
+
+    // Room Components...//
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    // runtime compose...//
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+
+    // splash Api..//
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
+    // Mongo DB Realm...//
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt"){
+        version{
+            strictly("1.6.0-native-mt")
+        }
+    }
+    implementation("io.realm.kotlin:library-sync:1.0.2")
+
+    // Dagger Hilt...//
+    implementation("com.google.dagger:hilt-android:2.44.2")
+    kapt("com.google.dagger:hilt-compiler:2.44.2")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+
+    // Google Auth...//
+    implementation("com.google.android.gms.play-service-auth:20.4.0")
+
+    /// Coil...//
+    implementation("io.coil-kt:coil-compose:2.2.2")
+
+    //Pager --- Accompanist..//
+    implementation("com.google.accompanist:accompanist-pager:0.27.0")
+
+    // Date Time Picker...//
+    implementation("io.github.vanpra.compose-material-dialogs:datetime:0.9.0")
+
+    // Message bar Compose...//
+    implementation("com.github.stevdza-san:OneTapCompose:1.0.0")
+
+    // Desugar JDK...//
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
