@@ -70,7 +70,8 @@ dependencies {
 
     // Firebase...//
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
-    implementation("com.google.firebase:firebase-storage-ktx:22.3.1")
+    implementation("com.google.firebase:firebase-storage-ktx:20.2.1")
+
 
     // Room Components...//
     implementation("androidx.room:room-runtime:2.6.1")
@@ -98,7 +99,7 @@ dependencies {
 
 
     // Google Auth...//
-    implementation("com.google.android.gms.play-service-auth:20.4.0")
+    //implementation("com.google.android.gms.play-service-auth:20.4.0")
 
     /// Coil...//
     implementation("io.coil-kt:coil-compose:2.2.2")
