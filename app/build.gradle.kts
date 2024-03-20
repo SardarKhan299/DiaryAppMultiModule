@@ -34,11 +34,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -85,14 +85,20 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
 
     // Mongo DB Realm...//
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0-native-mt"){
-        version{
-            strictly("1.6.0-native-mt")
-        }
-    }
-    implementation("io.realm.kotlin:library-sync:1.0.2")
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt"){
+//        version{
+//            strictly("1.5.0-native-mt")
+//        }
+//    }
+//    implementation("io.realm.kotlin:library-sync:1.0.2")
 
-    // Dagger Hilt...//
+    implementation ("io.realm.kotlin:library-base:1.11.0")
+    implementation ("io.realm.kotlin:library-sync:1.11.0") // If using Device Sync
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0") // If using coroutines with the SDK
+
+
+
+// Dagger Hilt...//
     implementation("com.google.dagger:hilt-android:2.44.2")
     kapt("com.google.dagger:hilt-compiler:2.44.2")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
