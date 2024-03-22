@@ -2,10 +2,12 @@ package com.example.diaryappmultimodule.presentation.screens.auth
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
 import com.example.diaryappmultimodule.MainActivity
 import com.example.diaryappmultimodule.util.Constants.CLIENT_ID
 import com.google.firebase.auth.FirebaseAuth
@@ -27,7 +29,8 @@ fun AuthenticationScreen(authenticated: Boolean,
                          onDialogDismissed: (String) -> Unit,
                          messageBarState: MessageBarState,
                          navigateToHome: () -> Unit) {
-    Scaffold( content = {
+    Log.d(AuthViewModel::class.simpleName, "AuthenticationScreen: called $authenticated - $loadingState")
+    Scaffold( modifier = Modifier.statusBarsPadding().statusBarsPadding(),content = {
         ContentWithMessageBar(messageBarState = messageBarState) {
             AuthenticationContent(loadingState = loadingState, onButtonClicked =onButtonClicked )
         }
@@ -57,8 +60,12 @@ fun AuthenticationScreen(authenticated: Boolean,
     )
 
     LaunchedEffect(key1 = authenticated) {
+        Log.d(AuthViewModel::class.simpleName, "AuthenticationScreen: Launch Effect")
         if (authenticated) {
+            Log.d(AuthViewModel::class.simpleName, "AuthenticationScreen: Launch Effect Authenticated True")
             navigateToHome()
+        }else{
+            Log.d(AuthViewModel::class.simpleName, "AuthenticationScreen: Launch Effect Authenticated False")
         }
     }
 }

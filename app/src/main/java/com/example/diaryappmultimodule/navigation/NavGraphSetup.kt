@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -30,21 +31,26 @@ import kotlinx.coroutines.launch
 @Composable
 fun SetupNavGraph(startDestination:String,navController: NavHostController) {
     NavHost(startDestination = startDestination,navController = navController ){
-        authenticationRoute()
+        authenticationRoute(navigateToHome = {
+            Log.d(NavGraphBuilder::class.simpleName, "SetupNavGraph: Goto Home...")
+            navController.popBackStack()
+            navController.navigate(Screen.Home.route)
+        })
         homeRoute()
         writeRoute()
     }
 }
 
-fun NavGraphBuilder.authenticationRoute(){
+fun NavGraphBuilder.authenticationRoute(navigateToHome:()->Unit){
     composable(route = Screen.Authentication.route){
 
-        val viewModel = AuthViewModel()
+        val viewModel: AuthViewModel = viewModel()
         val oneTapState = rememberOneTapSignInState()
         val messageBarState = rememberMessageBarState()
         val loadingState by viewModel.loadingState
+        val authenticated by viewModel.authenticated
 
-        AuthenticationScreen(authenticated = false,
+        AuthenticationScreen(authenticated = authenticated,
             loadingState = loadingState,
             oneTapState = oneTapState,
             onButtonClicked = {
@@ -55,8 +61,11 @@ fun NavGraphBuilder.authenticationRoute(){
                 Log.d(NavGraphBuilder::class.simpleName, "authenticationRoute: $tokenId")
                 viewModel.signInWithMongoAtlas(tokenId, onSuccess = {
                     messageBarState.addSuccess("Successfully Authenticated.")
+                    viewModel.setLoading(false)
+                    viewModel.setAuthenticated(true)
                 }, onError = {
                     messageBarState.addError(it)
+                    viewModel.setLoading(false)
                 })
             },
             onFailedFirebaseSignIn = {
@@ -69,7 +78,7 @@ fun NavGraphBuilder.authenticationRoute(){
                 messageBarState.addError(Exception(message))
                 viewModel.setLoading(false)
             },
-            navigateToHome = {}, messageBarState = messageBarState)
+            navigateToHome = navigateToHome, messageBarState = messageBarState)
     }
 }
 
@@ -80,7 +89,6 @@ fun NavGraphBuilder.homeRoute(){
             horizontalAlignment = Alignment.CenterHorizontally){
             Button(onClick = { scope.launch {  App.create(APP_ID).currentUser?.logOut() }}) {
                 Text(text = "Logout")
-
             }
         }
     }

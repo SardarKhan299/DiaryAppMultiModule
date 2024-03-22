@@ -10,16 +10,25 @@ import io.realm.kotlin.mongodb.App
 import io.realm.kotlin.mongodb.Credentials
 import io.realm.kotlin.mongodb.GoogleAuthType
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class AuthViewModel :ViewModel() {
+
+    var authenticated = mutableStateOf(false)
+        private set
 
     var loadingState = mutableStateOf(false)
         private set
 
     fun setLoading(loading:Boolean){
         loadingState.value = loading
+    }
+
+    fun setAuthenticated(authenticated:Boolean){
+        Log.d(AuthViewModel::class.simpleName, "setAuthenticated: $authenticated")
+        this.authenticated.value = authenticated
     }
 
     fun signInWithMongoAtlas(tokenId:String,onSuccess:(Boolean)->Unit,
