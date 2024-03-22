@@ -1,8 +1,16 @@
 package com.example.diaryappmultimodule.navigation
 
 import android.util.Log
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -12,9 +20,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.diaryappmultimodule.presentation.screens.auth.AuthViewModel
 import com.example.diaryappmultimodule.presentation.screens.auth.AuthenticationScreen
+import com.example.diaryappmultimodule.util.Constants.APP_ID
 import com.example.diaryappmultimodule.util.Constants.WRITE_SCREEN_KEY
 import com.stevdzasan.messagebar.rememberMessageBarState
 import com.stevdzasan.onetap.rememberOneTapSignInState
+import io.realm.kotlin.mongodb.App
+import kotlinx.coroutines.launch
 
 @Composable
 fun SetupNavGraph(startDestination:String,navController: NavHostController) {
@@ -64,7 +75,14 @@ fun NavGraphBuilder.authenticationRoute(){
 
 fun NavGraphBuilder.homeRoute(){
     composable(route = Screen.Home.route){
+        val scope = rememberCoroutineScope()
+        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally){
+            Button(onClick = { scope.launch {  App.create(APP_ID).currentUser?.logOut() }}) {
+                Text(text = "Logout")
 
+            }
+        }
     }
 }
 

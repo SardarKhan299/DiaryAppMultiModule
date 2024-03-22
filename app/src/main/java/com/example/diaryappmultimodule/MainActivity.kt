@@ -15,6 +15,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.diaryappmultimodule.navigation.Screen
 import com.example.diaryappmultimodule.navigation.SetupNavGraph
 import com.example.diaryappmultimodule.ui.theme.DiaryAppMultiModuleTheme
+import com.example.diaryappmultimodule.util.Constants.APP_ID
+import io.realm.kotlin.mongodb.App
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +25,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             DiaryAppMultiModuleTheme {
                 val navController = rememberNavController()
-                SetupNavGraph(Screen.Authentication.route,navController)
+                SetupNavGraph(getStartDestination(),navController)
             }
         }
+    }
+
+    private fun getStartDestination():String{
+        val user = App.create(APP_ID).currentUser
+        return if (user!=null && user.loggedIn) Screen.Home.route
+        else Screen.Authentication.route
+
     }
 }

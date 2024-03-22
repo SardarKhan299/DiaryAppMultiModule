@@ -28,7 +28,9 @@ class AuthViewModel :ViewModel() {
             try {
                 val result = withContext(Dispatchers.IO){
                     App.create(Constants.APP_ID).login(
-                        Credentials.google(tokenId,GoogleAuthType.ID_TOKEN)
+                        // to login with JWT Authentication...//
+                        Credentials.jwt(tokenId)
+                        //Credentials.google(tokenId,GoogleAuthType.ID_TOKEN)
                     ).loggedIn
                 }
                 withContext(Dispatchers.Main){
