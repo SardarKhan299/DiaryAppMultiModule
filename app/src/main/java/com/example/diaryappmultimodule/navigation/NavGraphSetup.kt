@@ -10,7 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -21,6 +24,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.diaryappmultimodule.presentation.components.DisplayAlertDialog
 import com.example.diaryappmultimodule.presentation.screens.auth.AuthViewModel
 import com.example.diaryappmultimodule.presentation.screens.auth.AuthenticationScreen
 import com.example.diaryappmultimodule.presentation.screens.home.HomeScreen
@@ -29,11 +33,13 @@ import com.example.diaryappmultimodule.util.Constants.WRITE_SCREEN_KEY
 import com.stevdzasan.messagebar.rememberMessageBarState
 import com.stevdzasan.onetap.rememberOneTapSignInState
 import io.realm.kotlin.mongodb.App
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
-fun SetupNavGraph(startDestination:String,navController: NavHostController) {
-    NavHost(startDestination = startDestination,navController = navController ){
+fun SetupNavGraph(startDestination: String, navController: NavHostController) {
+    NavHost(startDestination = startDestination, navController = navController) {
         authenticationRoute(navigateToHome = {
             Log.d(NavGraphBuilder::class.simpleName, "SetupNavGraph: Goto Home...")
             navController.popBackStack()
@@ -41,13 +47,16 @@ fun SetupNavGraph(startDestination:String,navController: NavHostController) {
         })
         homeRoute(navigateToWriteScreen = {
             navController.navigate(Screen.Write.route)
+        }, navigateToAuth = {
+            navController.popBackStack()
+            navController.navigate(Screen.Authentication.route)
         })
         writeRoute()
     }
 }
 
-fun NavGraphBuilder.authenticationRoute(navigateToHome:()->Unit){
-    composable(route = Screen.Authentication.route){
+fun NavGraphBuilder.authenticationRoute(navigateToHome: () -> Unit) {
+    composable(route = Screen.Authentication.route) {
 
         val viewModel: AuthViewModel = viewModel()
         val oneTapState = rememberOneTapSignInState()
@@ -55,7 +64,8 @@ fun NavGraphBuilder.authenticationRoute(navigateToHome:()->Unit){
         val loadingState by viewModel.loadingState
         val authenticated by viewModel.authenticated
 
-        AuthenticationScreen(authenticated = authenticated,
+        AuthenticationScreen(
+            authenticated = authenticated,
             loadingState = loadingState,
             oneTapState = oneTapState,
             onButtonClicked = {
@@ -83,38 +93,49 @@ fun NavGraphBuilder.authenticationRoute(navigateToHome:()->Unit){
                 messageBarState.addError(Exception(message))
                 viewModel.setLoading(false)
             },
-            navigateToHome = navigateToHome, messageBarState = messageBarState)
+            navigateToHome = navigateToHome, messageBarState = messageBarState
+        )
     }
 }
 
-fun NavGraphBuilder.homeRoute(navigateToWriteScreen : ()-> Unit){
-    composable(route = Screen.Home.route){
+fun NavGraphBuilder.homeRoute(navigateToWriteScreen: () -> Unit,navigateToAuth: () -> Unit,) {
+    composable(route = Screen.Home.route) {
         val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
         val scope = rememberCoroutineScope()
+        var signOutDialogOpened by remember {
+            mutableStateOf(false)
+        }
         HomeScreen(onMenuClicked = {
-                                   scope.launch { drawerState.open() }
+            scope.launch { drawerState.open() }
         }, navigateToWriteScren = navigateToWriteScreen, onSignedOutClicked = {
-
+            signOutDialogOpened = true
         }, drawerState = drawerState)
-        // Logout User logic..//
-//        val scope = rememberCoroutineScope()
-//        val viewModel: AuthViewModel = viewModel()
-//        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally){
-//            Button(onClick = { scope.launch {  App.create(APP_ID).currentUser?.logOut() }}) {
-//                Text(text = "Logout")
-//                viewModel.setAuthenticated(false)
-//            }
-//        }
+
+        DisplayAlertDialog(
+            title = "Sign Out",
+            message = "Are You sure you want to SignOut ?",
+            dialogOpened = signOutDialogOpened,
+            onDialogClosed = {signOutDialogOpened = false},
+            onYesClicked = {scope.launch(Dispatchers.IO) {
+                val user = App.create(APP_ID).currentUser
+                if (user != null) {
+                    user.logOut()
+                    withContext(Dispatchers.Main) {
+                        navigateToAuth()
+                    }
+                }
+            }})
+
+
     }
 }
 
-fun NavGraphBuilder.writeRoute(){
-    composable(route = Screen.Write.route, arguments = listOf(navArgument(WRITE_SCREEN_KEY){
+fun NavGraphBuilder.writeRoute() {
+    composable(route = Screen.Write.route, arguments = listOf(navArgument(WRITE_SCREEN_KEY) {
         type = NavType.StringType
         nullable = true
         defaultValue = null
-    })){
+    })) {
 
     }
 }
