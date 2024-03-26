@@ -2,8 +2,10 @@ package com.example.diaryappmultimodule.presentation.screens.auth
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,7 +32,7 @@ fun AuthenticationScreen(authenticated: Boolean,
                          messageBarState: MessageBarState,
                          navigateToHome: () -> Unit) {
     Log.d(AuthViewModel::class.simpleName, "AuthenticationScreen: called $authenticated - $loadingState")
-    Scaffold( modifier = Modifier.statusBarsPadding().statusBarsPadding(),content = {
+    Scaffold( modifier = Modifier.statusBarsPadding().statusBarsPadding().background(MaterialTheme.colorScheme.surface),content = {
         ContentWithMessageBar(messageBarState = messageBarState) {
             AuthenticationContent(loadingState = loadingState, onButtonClicked =onButtonClicked )
         }

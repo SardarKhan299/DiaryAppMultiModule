@@ -21,6 +21,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.diaryappmultimodule.presentation.screens.auth.AuthViewModel
 import com.example.diaryappmultimodule.presentation.screens.auth.AuthenticationScreen
+import com.example.diaryappmultimodule.presentation.screens.home.HomeScreen
 import com.example.diaryappmultimodule.util.Constants.APP_ID
 import com.example.diaryappmultimodule.util.Constants.WRITE_SCREEN_KEY
 import com.stevdzasan.messagebar.rememberMessageBarState
@@ -36,7 +37,9 @@ fun SetupNavGraph(startDestination:String,navController: NavHostController) {
             navController.popBackStack()
             navController.navigate(Screen.Home.route)
         })
-        homeRoute()
+        homeRoute(navigateToWriteScreen = {
+            navController.navigate(Screen.Write.route)
+        })
         writeRoute()
     }
 }
@@ -82,15 +85,21 @@ fun NavGraphBuilder.authenticationRoute(navigateToHome:()->Unit){
     }
 }
 
-fun NavGraphBuilder.homeRoute(){
+fun NavGraphBuilder.homeRoute(navigateToWriteScreen : ()-> Unit){
     composable(route = Screen.Home.route){
-        val scope = rememberCoroutineScope()
-        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally){
-            Button(onClick = { scope.launch {  App.create(APP_ID).currentUser?.logOut() }}) {
-                Text(text = "Logout")
-            }
-        }
+        HomeScreen(onMenuClicked = {
+
+        },navigateToWriteScreen)
+        // Logout User logic..//
+//        val scope = rememberCoroutineScope()
+//        val viewModel: AuthViewModel = viewModel()
+//        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally){
+//            Button(onClick = { scope.launch {  App.create(APP_ID).currentUser?.logOut() }}) {
+//                Text(text = "Logout")
+//                viewModel.setAuthenticated(false)
+//            }
+//        }
     }
 }
 
