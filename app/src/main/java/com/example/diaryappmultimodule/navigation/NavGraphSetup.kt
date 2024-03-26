@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -87,9 +89,13 @@ fun NavGraphBuilder.authenticationRoute(navigateToHome:()->Unit){
 
 fun NavGraphBuilder.homeRoute(navigateToWriteScreen : ()-> Unit){
     composable(route = Screen.Home.route){
+        val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+        val scope = rememberCoroutineScope()
         HomeScreen(onMenuClicked = {
+                                   scope.launch { drawerState.open() }
+        }, navigateToWriteScren = navigateToWriteScreen, onSignedOutClicked = {
 
-        },navigateToWriteScreen)
+        }, drawerState = drawerState)
         // Logout User logic..//
 //        val scope = rememberCoroutineScope()
 //        val viewModel: AuthViewModel = viewModel()

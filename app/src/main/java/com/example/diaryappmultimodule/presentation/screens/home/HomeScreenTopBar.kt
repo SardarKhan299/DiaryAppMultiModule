@@ -14,13 +14,13 @@ import androidx.compose.runtime.Composable
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreenTopBar(onMenuClicked: ()-> Unit) {
-    TopAppBar(navigationIcon = { IconButton(onClick = { onMenuClicked}){
+    TopAppBar(navigationIcon = { IconButton(onClick = onMenuClicked){
         Icon(imageVector =Icons.Default.Menu , contentDescription ="Hamburger Menu Icon" )
     }
     },title = {
         Text(text = "Diary")
     }, actions = {
-        IconButton(onClick = { onMenuClicked}){
+        IconButton(onClick = onMenuClicked){
             Icon(imageVector =Icons.Default.DateRange , contentDescription ="Date Icon", tint = MaterialTheme.colorScheme.onSurface )
         }
         }
