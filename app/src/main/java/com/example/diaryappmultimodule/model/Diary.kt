@@ -9,7 +9,7 @@ import org.mongodb.kbson.ObjectId
 import java.time.Instant
 
 
-object Diary:RealmObject {
+open class Diary :RealmObject {
     @PrimaryKey
     var _id : ObjectId = ObjectId.invoke()
     var ownerId:String = ""
