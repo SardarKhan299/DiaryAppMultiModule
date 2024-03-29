@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
+import com.example.diaryappmultimodule.data.repository.MongoDB
 import com.example.diaryappmultimodule.navigation.Screen
 import com.example.diaryappmultimodule.navigation.SetupNavGraph
 import com.example.diaryappmultimodule.ui.theme.DiaryAppMultiModuleTheme

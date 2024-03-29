@@ -48,6 +48,7 @@ import com.example.diaryappmultimodule.model.Diary
 import com.example.diaryappmultimodule.model.Mood
 import com.example.diaryappmultimodule.ui.theme.Elevation
 import com.example.diaryappmultimodule.util.toInstant
+import io.realm.kotlin.ext.realmListOf
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -172,5 +173,6 @@ fun DiaryPrev() {
     DiaryHolder(diary = Diary().apply { title = "My Diary"
                                       description = "My diary Description"
                                       mood = Mood.Calm.name
+                                        images = realmListOf("", "")
                                       }, onclick = {})
 }
