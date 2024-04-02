@@ -1,10 +1,14 @@
 package com.example.diaryappmultimodule.presentation.screens.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -18,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.example.diaryappmultimodule.model.Diary
 import com.example.diaryappmultimodule.presentation.components.DiaryHolder
@@ -25,7 +30,9 @@ import java.time.LocalDate
 
 @Composable
 fun DateHeader(localDate: LocalDate) {
-    Row (verticalAlignment = Alignment.CenterVertically){
+    Row (
+        modifier = Modifier.padding(vertical = 14.dp).background(MaterialTheme.colorScheme.surface),
+        verticalAlignment = Alignment.CenterVertically){
         Column(horizontalAlignment = Alignment.End) {
             Text(text = String.format("%02d",localDate.dayOfMonth),
                 style = TextStyle(
@@ -51,7 +58,7 @@ fun DateHeader(localDate: LocalDate) {
                 )
             )
             Text(text = "${localDate.year}",
-                color = MaterialTheme.colorScheme.onSurface.copy(0.38f),
+                color = MaterialTheme.colorScheme.onSurface.copy(0.5f),
                 style = TextStyle(
                     fontSize = MaterialTheme.typography.bodySmall.fontSize,
                     fontWeight = FontWeight.Light
@@ -63,16 +70,23 @@ fun DateHeader(localDate: LocalDate) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeContent(diaryNotes:Map<LocalDate,List<Diary>>,
+fun HomeContent(paddingValues: PaddingValues,
+                diaryNotes:Map<LocalDate,List<Diary>>,
                 onclick: (String)->Unit) {
 
     if(diaryNotes.isNotEmpty()){
-        LazyColumn(modifier = Modifier.padding(horizontal = 24.dp)){
+        LazyColumn(modifier = Modifier
+            .padding(horizontal = 24.dp)
+            .padding(top = paddingValues.calculateTopPadding())
+            .padding(bottom = paddingValues.calculateBottomPadding())
+            .padding(start = paddingValues.calculateStartPadding(LayoutDirection.Ltr))
+            .padding(end = paddingValues.calculateEndPadding(LayoutDirection.Ltr))
+        ){
             diaryNotes.forEach{ (localDate,diaries)->
                 stickyHeader(key = localDate){
                     DateHeader(localDate = localDate)
                 }
-                items(items = diaries, key = { it._id }){
+                items(items = diaries, key = { it._id.toString() }){
                     DiaryHolder(diary = it, onclick = onclick)
                 }
             }
