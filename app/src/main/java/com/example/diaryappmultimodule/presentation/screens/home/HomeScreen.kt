@@ -32,6 +32,7 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,6 +40,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -60,9 +62,12 @@ fun HomeScreen(diaries: Diaries,drawerState: DrawerState,onMenuClicked: ()-> Uni
                navigateToWriteScren: ()-> Unit,onSignedOutClicked: ()->Unit) {
 
     var padding by remember{ mutableStateOf(PaddingValues()) }
+    var scrollbehaviour = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     NavigationDrawer(drawerState =drawerState , onSignOutClicked = onSignedOutClicked) {
-        Scaffold(topBar = {
-            HomeScreenTopBar(onMenuClicked)
+        Scaffold(
+            modifier = Modifier.nestedScroll(scrollbehaviour.nestedScrollConnection),
+            topBar = {
+            HomeScreenTopBar(scrollBehavior = scrollbehaviour,onMenuClicked = onMenuClicked)
         }, floatingActionButton = {
             FloatingActionButton(modifier = Modifier.padding(end = padding.calculateEndPadding(LayoutDirection.Ltr)), onClick = navigateToWriteScren) {
                 Icon(imageVector = Icons.Default.Edit ,
