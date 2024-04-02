@@ -32,6 +32,7 @@ import com.example.diaryappmultimodule.presentation.screens.auth.AuthViewModel
 import com.example.diaryappmultimodule.presentation.screens.auth.AuthenticationScreen
 import com.example.diaryappmultimodule.presentation.screens.home.HomeScreen
 import com.example.diaryappmultimodule.presentation.screens.home.HomeViewModel
+import com.example.diaryappmultimodule.presentation.screens.write.WriteScreen
 import com.example.diaryappmultimodule.util.Constants.APP_ID
 import com.example.diaryappmultimodule.util.Constants.WRITE_SCREEN_KEY
 import com.stevdzasan.messagebar.rememberMessageBarState
@@ -55,7 +56,9 @@ fun SetupNavGraph(startDestination: String, navController: NavHostController,onD
             navController.popBackStack()
             navController.navigate(Screen.Authentication.route)
         },onDataLoaded = onDataLoaded)
-        writeRoute()
+        writeRoute(onBackPressed = {
+            navController.popBackStack()
+        })
     }
 }
 
@@ -154,12 +157,12 @@ fun NavGraphBuilder.homeRoute(navigateToWriteScreen: () -> Unit,
     }
 }
 
-fun NavGraphBuilder.writeRoute() {
+fun NavGraphBuilder.writeRoute(onBackPressed:()->Unit) {
     composable(route = Screen.Write.route, arguments = listOf(navArgument(WRITE_SCREEN_KEY) {
         type = NavType.StringType
         nullable = true
         defaultValue = null
     })) {
-
+        WriteScreen (onBackPressed = onBackPressed)
     }
 }
