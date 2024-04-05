@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.example.diaryappmultimodule"
-    compileSdk = 34
+    compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
         applicationId = "com.example.diaryappmultimodule"
-        minSdk = 26
-        targetSdk = 34
+        minSdk = ProjectConfig.minSdk
+        targetSdk = ProjectConfig.targetSdk
         versionCode = 1
         versionName = "1.0"
 
@@ -45,7 +45,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.6"
+        kotlinCompilerExtensionVersion = ProjectConfig.extensionVersion
     }
     packaging {
         resources {
@@ -71,7 +71,7 @@ dependencies {
     debugImplementation ("androidx.compose.ui:ui-test-manifest:$compose_version")
 
     // Compose Navigation
-    implementation ("androidx.navigation:navigation-compose:2.7.3")
+    implementation (libs.navigation.compose)
 
     // Firebase
     implementation ("com.google.firebase:firebase-auth-ktx:22.1.2")
