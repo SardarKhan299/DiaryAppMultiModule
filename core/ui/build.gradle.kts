@@ -42,4 +42,8 @@ android {
 dependencies {
     implementation(libs.material3.compose)
     implementation(libs.activity.compose)
+            implementation (libs.compose.tooling.preview)
+    implementation (libs.coil)
+            implementation (libs.realm.sync)
+            implementation (libs.coroutines.core)
 }
