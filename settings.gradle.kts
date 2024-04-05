@@ -16,4 +16,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "DiaryAppMultiModule"
 include(":app")
- 
+include(":core:ui")
+include(":core:ui")
