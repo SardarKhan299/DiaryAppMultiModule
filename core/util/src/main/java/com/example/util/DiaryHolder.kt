@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.presentation.components
+package com.example.util
 
 import android.icu.util.LocaleData
 import android.net.Uri
@@ -44,10 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.diaryappmultimodule.model.Diary
-import com.example.diaryappmultimodule.model.Mood
-import com.example.diaryappmultimodule.ui.theme.Elevation
-import com.example.diaryappmultimodule.util.toInstant
+import com.example.ui.theme.Elevation
 import io.realm.kotlin.ext.realmListOf
 import java.time.Instant
 import java.time.LocalDate

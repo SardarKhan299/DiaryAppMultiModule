@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.util
+package com.example.util
 
 object Constants {
     const val APP_ID = "application-0-fdftt"

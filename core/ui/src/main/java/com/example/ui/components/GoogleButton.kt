@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import com.example.diaryappmultimodule.R
+import com.example.ui.R
 
 @Composable
 fun GoogleButton(

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import com.example.diaryappmultimodule.model.Diary
+import com.example.util.Diary
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

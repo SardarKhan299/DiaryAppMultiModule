@@ -4,7 +4,6 @@ plugins {
     id("io.realm.kotlin")
     id ("com.google.devtools.ksp")
     id("dagger.hilt.android.plugin")
-
     //id("com.google.gms.google-services")
 }
 
@@ -118,9 +117,11 @@ dependencies {
     // One-Tap Compose
     implementation ("com.github.stevdza-san:OneTapCompose:1.0.9")
 
-    // Desugar JDK
-    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.0.3")
-
     // include ui module
     implementation(project(":core:ui"))
+
+    // include util module.
+    implementation(project(":core:util"))
+    // include util module.
+    implementation(project(":data:mongo"))
 }

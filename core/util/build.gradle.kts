@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ui"
+    namespace = "com.example.uitil"
     compileSdk = ProjectConfig.compileSdk
 
     defaultConfig {
@@ -38,11 +38,13 @@ android {
 }
 
 dependencies {
+    implementation (libs.desugar.jdk)
+    implementation (libs.realm.sync)
+    implementation (libs.coroutines.core)
+    implementation (libs.core.ktx)
     implementation(libs.material3.compose)
     implementation(libs.activity.compose)
     implementation (libs.compose.tooling.preview)
     implementation (libs.coil)
-    implementation (libs.realm.sync)
-    implementation (libs.coroutines.core)
-    implementation (libs.desugar.jdk)
+    implementation(project(":core:ui"))
 }

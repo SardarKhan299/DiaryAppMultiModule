@@ -1,7 +1,6 @@
-package com.example.diaryappmultimodule.data.repository
-
-import com.example.diaryappmultimodule.model.Diary
-import com.example.diaryappmultimodule.model.RequestState
+package com.example.mongo
+import com.example.util.Diary
+import com.example.util.RequestState
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 

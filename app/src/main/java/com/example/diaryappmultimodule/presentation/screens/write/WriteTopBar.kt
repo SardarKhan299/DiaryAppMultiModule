@@ -24,12 +24,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.example.diaryappmultimodule.model.Diary
 import com.example.diaryappmultimodule.presentation.components.DisplayAlertDialog
+import com.example.util.Diary
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WriteTopBar(selectedDiary: Diary?,onBackPressed:()->Unit,onDeleteConfirmed: () -> Unit) {
+fun WriteTopBar(selectedDiary: Diary?, onBackPressed:()->Unit, onDeleteConfirmed: () -> Unit) {
     CenterAlignedTopAppBar(navigationIcon = {
         IconButton(onClick = { onBackPressed()}) {
      Icon(

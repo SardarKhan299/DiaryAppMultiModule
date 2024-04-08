@@ -1,10 +1,10 @@
-package com.example.diaryappmultimodule.data.repository
+package com.example.mongo
 
 import android.util.Log
-import com.example.diaryappmultimodule.model.Diary
-import com.example.diaryappmultimodule.model.RequestState
-import com.example.diaryappmultimodule.util.Constants.APP_ID
-import com.example.diaryappmultimodule.util.toInstant
+import com.example.util.Constants.APP_ID
+import com.example.util.Diary
+import com.example.util.RequestState
+import com.example.util.toInstant
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
 import io.realm.kotlin.log.LogLevel

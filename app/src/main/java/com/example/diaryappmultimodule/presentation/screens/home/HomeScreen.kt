@@ -47,10 +47,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.example.diaryappmultimodule.R
-import com.example.diaryappmultimodule.data.repository.Diaries
-import com.example.diaryappmultimodule.model.Diary
-import com.example.diaryappmultimodule.model.RequestState
-import com.example.diaryappmultimodule.presentation.components.DiaryHolder
+import com.example.mongo.Diaries
+import com.example.util.Diary
+import com.example.util.RequestState
 import java.time.LocalDate
 
 

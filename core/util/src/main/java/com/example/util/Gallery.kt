@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.presentation.components
+package com.example.util
 
 import android.net.Uri
 import androidx.compose.foundation.layout.Box

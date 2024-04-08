@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.model
+package com.example.util
 
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.types.RealmInstant

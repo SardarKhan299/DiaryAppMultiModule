@@ -1,11 +1,10 @@
 package com.example.diaryappmultimodule.presentation.screens.auth
 
-import android.app.appsearch.AppSearchManager
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.diaryappmultimodule.util.Constants
+import com.example.util.Constants
 import io.realm.kotlin.mongodb.App
 import io.realm.kotlin.mongodb.Credentials
 import io.realm.kotlin.mongodb.GoogleAuthType

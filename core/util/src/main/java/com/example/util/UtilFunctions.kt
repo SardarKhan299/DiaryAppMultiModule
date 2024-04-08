@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.util
+package com.example.util
 
 import io.realm.kotlin.types.RealmInstant
 import java.time.Instant
