@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.presentation.screens.home
+package com.example.home
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf

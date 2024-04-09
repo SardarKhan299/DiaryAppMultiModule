@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.presentation.screens.home
+package com.example.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi

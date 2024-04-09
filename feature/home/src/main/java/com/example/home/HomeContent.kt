@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.presentation.screens.home
+package com.example.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background

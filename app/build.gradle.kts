@@ -123,6 +123,8 @@ dependencies {
     implementation(project(":core:util"))
     // include data module.
     implementation(project(":data:mongo"))
-    // include feature module.
+    // include feature module Auth.
     implementation(project(":feature:auth"))
+    // include feature module Home.
+    implementation(project(":feature:home"))
 }
