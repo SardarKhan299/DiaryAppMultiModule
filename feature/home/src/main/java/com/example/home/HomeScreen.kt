@@ -46,7 +46,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.example.diaryappmultimodule.R
 import com.example.mongo.Diaries
 import com.example.util.Diary
 import com.example.util.RequestState
@@ -116,11 +115,11 @@ fun NavigationDrawer(drawerState: DrawerState,onSignOutClicked: ()->Unit,
                 Box(modifier = Modifier
                     .fillMaxWidth()
                     .height(250.dp), contentAlignment = Alignment.Center){
-                    Image(modifier = Modifier.size(250.dp), painter = painterResource(id = R.drawable.ic_launcher_foreground) ,
+                    Image(modifier = Modifier.size(250.dp), painter = painterResource(id = com.example.ui.R.drawable.ic_launcher_foreground) ,
                         contentDescription = "Logo Image")
                 }
                 NavigationDrawerItem(label = { Row(modifier = Modifier.padding(horizontal = 12.dp)){
-                    Image( painter = painterResource(id = R.drawable.google_logo) ,
+                    Image( painter = painterResource(id = com.example.ui.R.drawable.google_logo) ,
                         contentDescription = "Google Image")
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(text = "SignOut", color = MaterialTheme.colorScheme.onSurface)
