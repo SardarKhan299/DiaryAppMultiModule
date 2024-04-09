@@ -119,9 +119,10 @@ dependencies {
 
     // include ui module
     implementation(project(":core:ui"))
-
     // include util module.
     implementation(project(":core:util"))
-    // include util module.
+    // include data module.
     implementation(project(":data:mongo"))
+    // include feature module.
+    implementation(project(":feature:auth"))
 }

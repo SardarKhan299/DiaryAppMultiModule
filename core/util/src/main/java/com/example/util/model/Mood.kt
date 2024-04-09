@@ -1,7 +1,6 @@
 package com.example.util
 
 import androidx.compose.ui.graphics.Color
-import com.example.diaryappmultimodule.R
 import com.example.ui.theme.AngryColor
 import com.example.ui.theme.AwfulColor
 import com.example.ui.theme.BoredColor
@@ -18,6 +17,7 @@ import com.example.ui.theme.ShamefulColor
 import com.example.ui.theme.SurprisedColor
 import com.example.ui.theme.SuspiciousColor
 import com.example.ui.theme.TenseColor
+import com.example.uitil.R
 
 enum class Mood(
     val icon: Int,

@@ -2,8 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("io.realm.kotlin")
-    id ("com.google.devtools.ksp")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -43,22 +41,14 @@ android {
 dependencies {
 
 
-    implementation (libs.desugar.jdk)
+    implementation (libs.activity.compose)
+    implementation (libs.material3.compose)
+    implementation (libs.navigation.compose)
+    implementation (libs.one.tap.compose)
+    implementation (libs.message.bar.compose)
+    implementation (libs.firebase.auth)
+    implementation (libs.coroutines.core)
     implementation (libs.realm.sync)
-    implementation (libs.coroutines.core)
-    implementation (libs.core.ktx)
-    implementation(libs.material3.compose)
-    implementation(libs.activity.compose)
-    implementation (libs.compose.tooling.preview)
-    implementation (libs.coil)
-    implementation (libs.coroutines.core)
-
-    implementation (libs.room.runtime)
-    implementation (libs.room.ktx)
-    ksp (libs.room.compiler)
-
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.compiler)
-
+    implementation(project(":core:ui"))
     implementation(project(":core:util"))
 }

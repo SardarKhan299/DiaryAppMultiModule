@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.presentation.screens.auth
+package com.example.auth
 
 import androidx.compose.runtime.Composable
 
@@ -12,8 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.diaryappmultimodule.R
-import com.example.diaryappmultimodule.presentation.components.GoogleButton
+import com.example.ui.theme.GoogleButton
 
 @Composable
 fun AuthenticationContent(
@@ -39,7 +38,7 @@ fun AuthenticationContent(
             ) {
                 Image(
                     modifier = Modifier.size(120.dp),
-                    painter = painterResource(id = R.drawable.google_logo),
+                    painter = painterResource(id = com.example.ui.R.drawable.google_logo),
                     contentDescription = "Google Logo"
                 )
                 Spacer(modifier = Modifier.height(20.dp))

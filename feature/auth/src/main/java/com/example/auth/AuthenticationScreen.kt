@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.presentation.screens.auth
+package com.example.auth
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -10,10 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import com.example.diaryappmultimodule.MainActivity
 import com.example.util.Constants.CLIENT_ID
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.stevdzasan.messagebar.ContentWithMessageBar
 import com.stevdzasan.messagebar.MessageBarState
 import com.stevdzasan.onetap.OneTapSignInState
@@ -43,7 +40,6 @@ fun AuthenticationScreen(authenticated: Boolean,
         state = oneTapState,
         clientId = CLIENT_ID,
         onTokenIdReceived = { tokenId ->
-            Log.d(MainActivity::class.simpleName, "AuthenticationScreen: $tokenId")
             onSuccessfulFirebaseSignIn(tokenId)
 //            val credential = GoogleAuthProvider.getCredential(tokenId, null)
 //            FirebaseAuth.getInstance().signInWithCredential(credential)

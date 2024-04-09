@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.presentation.screens.auth
+package com.example.auth
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
