@@ -127,4 +127,6 @@ dependencies {
     implementation(project(":feature:auth"))
     // include feature module Home.
     implementation(project(":feature:home"))
+    // include feature module Write.
+    implementation(project(":feature:write"))
 }

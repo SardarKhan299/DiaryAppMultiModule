@@ -5,15 +5,10 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.example.auth.navigation.authenticationRoute
-import com.example.diaryappmultimodule.presentation.screens.write.WriteScreen
 import com.example.home.navigation.homeRoute
-import com.example.util.Constants.WRITE_SCREEN_KEY
-import com.example.util.Diary
+import com.example.write.navigation.writeRoute
 
 @Composable
 fun SetupNavGraph(startDestination: String, navController: NavHostController,onDataLoaded: () -> Unit) {
@@ -37,15 +32,3 @@ fun SetupNavGraph(startDestination: String, navController: NavHostController,onD
 
 
 
-fun NavGraphBuilder.writeRoute(onBackPressed:()->Unit) {
-    composable(route = Screen.Write.route, arguments = listOf(navArgument(WRITE_SCREEN_KEY) {
-        type = NavType.StringType
-        nullable = true
-        defaultValue = null
-    })) {
-        WriteScreen (onBackPressed = onBackPressed, onDeleteConfirmed = {}, selectedDiary = Diary().apply {
-            title = "Delete Diary"
-            description = "Some Random Diary.."
-        })
-    }
-}

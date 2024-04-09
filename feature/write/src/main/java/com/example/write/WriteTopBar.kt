@@ -1,4 +1,4 @@
-package com.example.diaryappmultimodule.presentation.screens.write
+package com.example.write
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.example.diaryappmultimodule.presentation.components.DisplayAlertDialog
+import com.example.ui.theme.DisplayAlertDialog
 import com.example.util.Diary
 
 @OptIn(ExperimentalMaterial3Api::class)
